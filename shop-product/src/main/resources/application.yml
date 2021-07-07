@@ -1,0 +1,30 @@
+server:
+  port: 8081
+spring:
+#  zipkin:
+#    base-url: http://localhost:9411/  #zipkin server的请求地址
+#    discoveryClientEnabled: false #让nacos把它当成一个URL，而不要当做服务名
+#  sleuth:
+#    sampler:
+#      probability: 1  #采样的百分比
+  application:
+    name: service-product
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://rds.aliyuncs.com:3306/springcloudalibaba?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: CyPde666
+  jpa:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+service-product: # 调用的提供者的名称
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
